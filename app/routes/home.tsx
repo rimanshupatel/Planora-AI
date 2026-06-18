@@ -3,7 +3,9 @@ import { Welcome } from "../welcome/welcome";
 import Navbar from "../components/Navbar";
 import { ArrowRight, ArrowUpRight, Clock, Layers } from "lucide-react";
 import Button from "../components/ui/Button";
-export function meta({ }: Route.MetaArgs) {
+import Upload from "~/components/Upload";
+import { useNavigate } from "react-router";
+export function meta({}: Route.MetaArgs) {
   return [
     { title: "New React Router App" },
     { name: "description", content: "Welcome to React Router!" },
@@ -11,6 +13,14 @@ export function meta({ }: Route.MetaArgs) {
 }
 
 export default function Home() {
+  const navigate = useNavigate();
+
+  const handleUploadComplete = async (base64Image: string) => {
+    const newId = Date.now().toString();
+    navigate(`/visualizer/${newId}`);
+
+    return true;
+  };
   return (
     <div className="home">
       <Navbar />
@@ -27,7 +37,8 @@ export default function Home() {
         <h1>Build beautiful spaces at the speed of thought with Roomify</h1>
 
         <p className="subtitle">
-          Roomify is an AI-first design environment that helps you visualize, render, and ship architectural projects faster  than ever.
+          Roomify is an AI-first design environment that helps you visualize,
+          render, and ship architectural projects faster than ever.
         </p>
 
         <div className="actions">
@@ -53,7 +64,7 @@ export default function Home() {
               <p>Supports JPG, PNG, formats up to 10MB</p>
             </div>
 
-            {/* <Upload onComplete={handleUploadComplete} /> */}
+            <Upload onComplete={handleUploadComplete} />
           </div>
         </div>
       </section>
@@ -63,13 +74,14 @@ export default function Home() {
           <div className="section-head">
             <div className="copy">
               <h2>Projects</h2>
-              <p>Your latest work and shared community projects, all in one place.</p>
+              <p>
+                Your latest work and shared community projects, all in one
+                place.
+              </p>
             </div>
           </div>
-
-
         </div>
       </section>
     </div>
-  )
+  );
 }
