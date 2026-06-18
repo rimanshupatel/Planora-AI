@@ -1,8 +1,9 @@
 import { Box } from "lucide-react";
 import Button from "../components/ui/Button";
-import { useOutletContext } from "react-router";
+import { useNavigate, useOutletContext } from "react-router";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const { isSignedIn, signIn, signOut, userName } =
     useOutletContext<AuthContext>();
 
@@ -27,17 +28,18 @@ const Navbar = () => {
     <header className="navbar">
       <nav className="inner">
         <div className="left">
-          <div className="brand">
+          <div className="brand" onClick={() => navigate("/")}>
             <Box className="logo" />
 
-            <span className="name">Roomify</span>
+            <span className="name">Planora</span>
           </div>
 
           <ul className="links">
-            <a href="#">Product</a>
-            <a href="#">Pricing</a>
-            <a href="#">Community</a>
-            <a href="#">Enterprise</a>
+            <a href="/creations">creations</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#community">Community</a>
+            <a href="#enterprise">Enterprise</a>
           </ul>
         </div>
 
